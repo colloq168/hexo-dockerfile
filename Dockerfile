@@ -3,7 +3,10 @@ MAINTAINER Stephen Liang "docker-maint@stephenliang.pw"
 
 ADD default.conf /etc/nginx/conf.d/default.conf
 
-ENV HEXO_VERSION 2.8.3
+# SSL
+ADD ssl /etc/ssl/sites/blog
+
+ENV HEXO_VERSION 3.0.0
 
 # Grab dependencies
 RUN apt-get update && apt-get install -y curl
@@ -15,6 +18,7 @@ RUN hexo init /usr/share/nginx/html
 WORKDIR /usr/share/nginx/html
 RUN npm install
 
-VOLUME /usr/share/nginx/html/source
+RUN rm -rf source && git clone https://bitbucket.org/simplyintricate/blog-posts.git source
+ADD _config.yml /usr/share/nginx/html/_config.yml
 
 CMD hexo generate && nginx -g "daemon off;"
