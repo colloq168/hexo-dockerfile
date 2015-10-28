@@ -9,7 +9,7 @@ ADD ssl /etc/ssl/sites/blog
 ENV HEXO_VERSION 3.0.0
 
 # Grab dependencies
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl &&  rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://deb.nodesource.com/setup | bash - && apt-get update && apt-get install -y curl git nodejs
 RUN npm install -g hexo@${HEXO_VERSION}
 
