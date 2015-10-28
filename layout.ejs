@@ -1,0 +1,32 @@
+<%- partial('_partial/head') %>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <%- partial('_partial/header') %>
+      <div id='content' class="container">
+
+        <div class="page-header-wrapper">
+          <div class="page-header">
+        </div>
+      </div>
+      <% if (is_wiki() && page.path !== theme.wiki_dir + '/'){ %>
+        <%- partial('_partial/wiki-toc') %>
+      <% } %>
+      <section id="main"
+        <% if (is_wiki() && page.path !== theme.wiki_dir + '/'){ %>
+          style="float: right;"
+        <% } else if (is_page()){ %>
+          style="float: none; display: inherit; width: 95% !important; margin: 0 auto;"
+        <% } %>
+      ><%- body %></section>
+        <% if (theme.sidebar && theme.sidebar !== 'bottom'){ %>
+          <%- partial('_partial/sidebar') %>
+        <% } %>
+      </div>
+      <%- partial('_partial/footer') %>
+    </div>
+    <%- partial('_partial/mobile-nav') %>
+    <%- partial('_partial/after-footer') %>
+  </div>
+</body>
+</html>
